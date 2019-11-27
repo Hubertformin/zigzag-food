@@ -1,0 +1,56 @@
+<!-- <ion-nav #nav [root]="startPage">-->
+<!--        <ion-list>-->
+<!--                <ion-item *ngFor="let tech of techs" button (click)="showDetail(tech.title)">-->
+<!--                  <ion-icon slot="start" name="logo-${tech.icon}" style="color: {{tech.color}};"></ion-icon>-->
+<!--                  <ion-label>-->
+<!--                    <h3>{{tech.title}}</h3>-->
+<!--                  </ion-label>-->
+<!--                </ion-item>-->
+<!--        </ion-list>-->
+<!--    </ion-nav>-->
+<ion-header>
+    <ion-toolbar>
+        <ion-title>
+            Shop
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-list>
+        <ion-item *ngFor="let tech of techs" button (click)="showDetail(tech.title)">
+            <ion-icon slot="start" [name]="'logo-' +tech.icon" [ngStyle]="{color: tech.color}"></ion-icon>
+            <ion-label>
+                <h3>{{tech.title}}</h3>
+            </ion-label>
+        </ion-item>
+    </ion-list>
+<!--    <section class="py-4">-->
+<!--        <ion-list lines="none">-->
+<!--            <ion-searchbar showCancelButton="focus"></ion-searchbar>-->
+<!--            <ion-list-header>-->
+<!--                <ion-label>CATEGORIES</ion-label>-->
+<!--            </ion-list-header>-->
+<!--            &lt;!&ndash;    &ndash;&gt;-->
+<!--            <ion-card>-->
+<!--                <ion-card-header>-->
+<!--                    <ion-card-title>Food</ion-card-title>-->
+<!--                </ion-card-header>-->
+<!--            </ion-card>-->
+<!--            <ion-card>-->
+<!--                <ion-card-header>-->
+<!--                    <ion-card-title>Vegetables</ion-card-title>-->
+<!--                </ion-card-header>-->
+<!--            </ion-card>-->
+<!--            <ion-card>-->
+<!--                <ion-card-header>-->
+<!--                    <ion-card-title>Fruits</ion-card-title>-->
+<!--                </ion-card-header>-->
+<!--            </ion-card>-->
+<!--            <ion-card>-->
+<!--                <ion-card-header>-->
+<!--                    <ion-card-title>Beverages</ion-card-title>-->
+<!--                </ion-card-header>-->
+<!--            </ion-card>-->
+<!--        </ion-list>-->
+<!--    </section>-->
+</ion-content>
