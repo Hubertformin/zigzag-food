@@ -1,1 +1,15 @@
+.ios .page {
+  background: #eeeced45;
+}
 
+.ios .f-row {
+  background: white;
+  border-top: 0.5px solid #dddddd;
+  border-bottom: 0.5px solid #dddddd;
+  &.main {
+    height: 80px;
+    .title {
+      font-size: 1.5rem;
+    }
+  }
+}

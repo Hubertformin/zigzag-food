@@ -1,0 +1,19 @@
+<section id="body" class="w-full h-full bg-green-dark">
+    <div class="overlay">
+        <div class="center-container" [formGroup]="loginForm">
+            <h1 class="mb-3 text-center text-green">ZigZag</h1>
+            <ion-item class="item">
+                <ion-label position="stacked">Username / Email</ion-label>
+                <ion-input formControlName="username" class="item-input" placeholder="Username / Email"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="stacked">Password</ion-label>
+                <ion-input formControlName="password" placeholder="********" type="password"></ion-input>
+            </ion-item>
+            <div class="my-3 text-center">
+                <ion-button (click)="login()" color="primary" size="full">Login</ion-button>
+                <p class="py-3 text-right">or <a routerLink="/auth/sign-up">create account</a></p>
+            </div>
+        </div>
+    </div>
+</section>

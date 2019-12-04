@@ -13,44 +13,28 @@
         <ion-title>
             Shop
         </ion-title>
+        <ion-buttons class="relative ion-margin-end" routerLink="/main/tabs/shop/cart" slot="end">
+            <span class="text-green" *ngIf="platform.is('ios')">Cart({{purchase.cart.length}})</span>
+            <ion-icon *ngIf="!platform.is('ios')" slot="icon-only" name="cart"></ion-icon>
+            <ion-badge *ngIf="!platform.is('ios')" id="icon-badge" color="secondary">{{purchase.cart.length}}</ion-badge>
+        </ion-buttons>
     </ion-toolbar>
 </ion-header>
 <ion-content>
     <ion-list>
-        <ion-item *ngFor="let tech of techs" button (click)="showDetail(tech.title)">
-            <ion-icon slot="start" [name]="'logo-' +tech.icon" [ngStyle]="{color: tech.color}"></ion-icon>
+        <ion-searchbar showCancelButton="focus" animated="true"
+                       [debounce]="400" (ionChange)="onSearch($event)" (keyup.enter)="onSearch($event)" type="search"></ion-searchbar>
+        <ion-list-header>
+            <ion-label>CATEGORIES</ion-label>
+        </ion-list-header>
+        <ion-item *ngFor="let cat of categories" button (click)="showDetail(cat.name)">
+            <!--<ion-icon slot="start" [name]="'logo-' +tech.icon" [ngStyle]="{color: tech.color}"></ion-icon>-->
+            <ion-thumbnail slot="start">
+                <ion-img [src]="cat.imageUrl" style="border-radius: 50%;"></ion-img>
+            </ion-thumbnail>
             <ion-label>
-                <h3>{{tech.title}}</h3>
+                <h3>{{cat.name}}</h3>
             </ion-label>
         </ion-item>
     </ion-list>
-<!--    <section class="py-4">-->
-<!--        <ion-list lines="none">-->
-<!--            <ion-searchbar showCancelButton="focus"></ion-searchbar>-->
-<!--            <ion-list-header>-->
-<!--                <ion-label>CATEGORIES</ion-label>-->
-<!--            </ion-list-header>-->
-<!--            &lt;!&ndash;    &ndash;&gt;-->
-<!--            <ion-card>-->
-<!--                <ion-card-header>-->
-<!--                    <ion-card-title>Food</ion-card-title>-->
-<!--                </ion-card-header>-->
-<!--            </ion-card>-->
-<!--            <ion-card>-->
-<!--                <ion-card-header>-->
-<!--                    <ion-card-title>Vegetables</ion-card-title>-->
-<!--                </ion-card-header>-->
-<!--            </ion-card>-->
-<!--            <ion-card>-->
-<!--                <ion-card-header>-->
-<!--                    <ion-card-title>Fruits</ion-card-title>-->
-<!--                </ion-card-header>-->
-<!--            </ion-card>-->
-<!--            <ion-card>-->
-<!--                <ion-card-header>-->
-<!--                    <ion-card-title>Beverages</ion-card-title>-->
-<!--                </ion-card-header>-->
-<!--            </ion-card>-->
-<!--        </ion-list>-->
-<!--    </section>-->
 </ion-content>

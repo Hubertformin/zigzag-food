@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Create account</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form action="#" class="pt-3 px-3" [formGroup]="form">
+<!--    -->
+    <div class="py-2">
+      <ion-item>
+        <ion-label position="stacked">Name</ion-label>
+        <ion-input formControlName="name" placeholder="Name"></ion-input>
+      </ion-item>
+        <p *ngIf="(name.dirty || name.touched) && name.invalid" class="text-red m-0 px-6"><small>A valid name is required</small></p>
+    </div>
+<!--    -->
+<!--    -->
+    <div class="py-2">
+      <ion-item>
+        <ion-label position="stacked">Email</ion-label>
+        <ion-input formControlName="email" placeholder="Email" type="email"></ion-input>
+      </ion-item>
+        <p *ngIf="(email.touched || email.dirty) && email.invalid" class="text-red m-0 px-6"><small>A valid name is required</small></p>
+    </div>
+<!--    -->
+<!--    -->
+    <div class="py-2">
+      <ion-item>
+        <ion-label position="stacked">Phone number</ion-label>
+        <ion-input formControlName="phoneNumber" placeholder="Phone number"></ion-input>
+      </ion-item>
+        <p *ngIf="(phoneNumber.dirty || phoneNumber.touched) && phoneNumber.invalid" class="text-red m-0 px-6"><small>Passwords do not match</small></p>
+    </div>
+<!--    -->
+<!--    -->
+    <div class="py-2">
+      <ion-item>
+        <ion-label position="stacked">Create password</ion-label>
+        <ion-input type="password" formControlName="password" placeholder="***********"></ion-input>
+      </ion-item>
+        <p *ngIf="(password.dirty || password.touched) && password.invalid" class="text-red m-0 px-6"><small>A valid password is required</small></p>
+    </div>
+    <!--    -->
+    <div class="py-2">
+      <ion-item>
+        <ion-label position="stacked">Confirm password</ion-label>
+        <ion-input type="password" formControlName="confirm" placeholder="***********"></ion-input>
+      </ion-item>
+        <p *ngIf="(confirmPassword.dirty || confirmPassword.touched) && (confirmPassword.invalid || password.value !== confirmPassword.value)"
+           class="text-red m-0 px-6"><small>Passwords do not match</small></p>
+    </div>
+    <div class="py-3">
+<!--      <ion-button color="primary" size="full">Create account</ion-button>-->
+      <p class="pt-1 ml-4 text-grey-darker">Have account? <a routerLink="/auth">Login</a></p>
+    </div>
+<!--    -->
+  </form>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button (click)="signUp($event)" color="primary" size="full">Create account</ion-button>
+  </ion-toolbar>
+</ion-footer>

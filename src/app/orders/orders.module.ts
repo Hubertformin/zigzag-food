@@ -1,17 +1,17 @@
-import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { CartPage } from './cart.page';
+import { OrdersPage } from './orders.page';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
   imports: [
-    IonicModule,
+    SharedModule,
     CommonModule,
     FormsModule,
-    RouterModule.forChild([{ path: '', component: CartPage }])
+    RouterModule.forChild([{ path: '', component: OrdersPage }])
   ],
-  declarations: [CartPage]
+  declarations: [OrdersPage]
 })
-export class CartModule {}
+export class OrdersModule {}

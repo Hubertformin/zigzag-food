@@ -1,5 +1,7 @@
 {
   "name": "zigzag",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

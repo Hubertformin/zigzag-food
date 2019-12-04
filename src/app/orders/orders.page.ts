@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-cart',
-  templateUrl: 'cart.page.html',
-  styleUrls: ['cart.page.scss']
+  selector: 'app-orders',
+  templateUrl: 'orders.page.html',
+  styleUrls: ['orders.page.scss']
 })
-export class CartPage {
+export class OrdersPage {
 
   constructor() {}
 

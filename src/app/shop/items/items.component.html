@@ -1,95 +1,177 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-back-button [defaultHref]="'/main/tabs/shop/categories'" text="Categories"></ion-back-button>
     </ion-buttons>
     <ion-title>{{title}}</ion-title>
+    <!-- categories -->
+    <ion-buttons class="relative ion-margin-end" routerLink="/main/tabs/shop/cart" slot="end">
+      <span class="text-green" *ngIf="platform.is('ios')">Cart({{purchase.cart.length}})</span>
+      <ion-icon *ngIf="!platform.is('ios')" slot="icon-only" name="cart"></ion-icon>
+      <ion-badge *ngIf="!platform.is('ios')" id="icon-badge" color="secondary">{{purchase.cart.length}}</ion-badge>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <!-- body -->
 <ion-content>
-  <section class="pt-4 pb-4">
+    <section *ngIf="items.length > 0" class="pt-4 pb-4">
     <ion-list lines="none">
       <ion-searchbar showCancelButton="focus"></ion-searchbar>
       <ion-list-header>
         <ion-label>ITEMS</ion-label>
       </ion-list-header>
-      <ion-card class="items-card">
-        <img src="assets/images/products/food.jpg" alt="" />
-        <ion-card-header>
-          <!--          <ion-card-subtitle>Get Started</ion-card-subtitle>-->
-          <ion-card-title>Food</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <ion-grid>
+      <!--   List body   -->
+      <section *ngFor="let item of items" class="py-2 px-2" style="border-bottom: 1px solid #ddd;">
+        <ion-row>
+          <ion-col size="3">
+            <ion-img class="rounded" [src]="item.imageUrl"></ion-img>
+          </ion-col>
+          <ion-col size="9">
+            <p class="text-wrap my-0">{{item.name}}</p>
             <ion-row>
-              <ion-col size="8">
-                <h1>{{750 | currency: 'XAF'}}</h1>
+              <ion-col size="7">
+                <p class="text-grey-dark mb-0 mt-1">{{item.unitPrice | localeCurrency}}</p>
               </ion-col>
-              <ion-col size="4">
-                <ion-button size="small">+ Add to cart</ion-button>
+              <ion-col size="5" class="flex ion-align-items-center ion-justify-content-center">
+                <span *ngIf="purchase.isAddedToCart(item.id)" (click)="purchase.removeFromCart(item.id)"
+                      class="text-red p-1 flex ion-align-items-center border-solid border rounded border-red">
+<!--                  <ion-icon name="close-circle-outline"></ion-icon>-->
+                  <small> remove</small></span>
+                <!-- if not added to cart-->
+                <small *ngIf="!purchase.isAddedToCart(item.id)" (click)="addToCart(item)"
+                      class="text-green border-solid p-1 border rounded border-green">Add to cart</small>
               </ion-col>
             </ion-row>
-          </ion-grid>
-        </ion-card-content>
-      </ion-card>
-      <ion-card class="items-card">
-        <img src="assets/images/products/drinks.jpg" alt="" />
-        <ion-card-header>
-          <!--          <ion-card-subtitle>Get Started</ion-card-subtitle>-->
-          <ion-card-title>Cocktails</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <ion-grid>
-            <ion-row>
-              <ion-col size="8">
-                <h1>{{750 | currency: 'XAF'}}</h1>
-              </ion-col>
-              <ion-col size="4">
-                <ion-button size="small">+ Add to cart</ion-button>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-card-content>
-      </ion-card>
-      <ion-card class="items-card">
-        <img src="assets/images/products/burgers.jpg" alt="" />
-        <ion-card-header>
-          <!--          <ion-card-subtitle>Get Started</ion-card-subtitle>-->
-          <ion-card-title>Burgers</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <ion-grid>
-            <ion-row>
-              <ion-col size="8">
-                <h1>{{1500 | currency: 'XAF'}}</h1>
-              </ion-col>
-              <ion-col size="4">
-                <ion-button size="small">+ Add to cart</ion-button>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-card-content>
-      </ion-card>
-      <ion-card class="items-card">
-        <img src="../../../assets/images/products/eggs.jpg" alt="" />
-        <ion-card-header>
-          <!--          <ion-card-subtitle>Get Started</ion-card-subtitle>-->
-          <ion-card-title>Eggs</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <ion-grid>
-            <ion-row>
-              <ion-col size="8">
-                <h1>{{500 | currency: 'XAF'}}</h1>
-              </ion-col>
-              <ion-col size="4">
-                <ion-button size="small">+ Add to cart</ion-button>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-card-content>
-      </ion-card>
+          </ion-col>
+        </ion-row>
+      </section>
+
+<!--      <ion-card class="items-card">-->
+<!--        <img src="assets/images/products/food.jpg" alt="" />-->
+<!--        <ion-card-header>-->
+<!--          &lt;!&ndash;          <ion-card-subtitle>Get Started</ion-card-subtitle>&ndash;&gt;-->
+<!--          <ion-card-title>Food</ion-card-title>-->
+<!--        </ion-card-header>-->
+<!--        <ion-card-content>-->
+<!--          <ion-grid>-->
+<!--            <ion-row>-->
+<!--              <ion-col size="8">-->
+<!--                <h1>{{750 | currency: 'XAF'}}</h1>-->
+<!--              </ion-col>-->
+<!--              <ion-col size="4">-->
+<!--                <ion-button size="small">+ Add to cart</ion-button>-->
+<!--              </ion-col>-->
+<!--            </ion-row>-->
+<!--          </ion-grid>-->
+<!--        </ion-card-content>-->
+<!--      </ion-card>-->
     </ion-list>
   </section>
+    <!-- Skeleton screen -->
+    <section *ngIf="items.length < 1">
+        <div class="ion-padding custom-skeleton">
+            <ion-skeleton-text animated style="height: 35px;width: 100%; border-radius: 12px;"></ion-skeleton-text>
+        </div>
+        <ion-list>
+            <ion-list-header>
+                <ion-skeleton-text animated style="width: 20%"></ion-skeleton-text>
+            </ion-list-header>
+            <ion-item>
+                <ion-thumbnail slot="start">
+                    <ion-skeleton-text animated></ion-skeleton-text>
+                </ion-thumbnail>
+                <ion-label>
+                    <h3>
+                        <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+                    </h3>
+                    <p>
+                        <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+                    </p>
+                    <p>
+                        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+                    </p>
+                </ion-label>
+            </ion-item>
+            <ion-item>
+                <ion-thumbnail slot="start">
+                    <ion-skeleton-text animated></ion-skeleton-text>
+                </ion-thumbnail>
+                <ion-label>
+                    <h3>
+                        <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+                    </h3>
+                    <p>
+                        <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+                    </p>
+                    <p>
+                        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+                    </p>
+                </ion-label>
+            </ion-item>
+            <ion-item>
+                <ion-thumbnail slot="start">
+                    <ion-skeleton-text animated></ion-skeleton-text>
+                </ion-thumbnail>
+                <ion-label>
+                    <h3>
+                        <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+                    </h3>
+                    <p>
+                        <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+                    </p>
+                    <p>
+                        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+                    </p>
+                </ion-label>
+            </ion-item>
+            <ion-item>
+                <ion-thumbnail slot="start">
+                    <ion-skeleton-text animated></ion-skeleton-text>
+                </ion-thumbnail>
+                <ion-label>
+                    <h3>
+                        <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+                    </h3>
+                    <p>
+                        <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+                    </p>
+                    <p>
+                        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+                    </p>
+                </ion-label>
+            </ion-item>
+            <ion-item>
+                <ion-thumbnail slot="start">
+                    <ion-skeleton-text animated></ion-skeleton-text>
+                </ion-thumbnail>
+                <ion-label>
+                    <h3>
+                        <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+                    </h3>
+                    <p>
+                        <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+                    </p>
+                    <p>
+                        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+                    </p>
+                </ion-label>
+            </ion-item>
+            <ion-item>
+                <ion-thumbnail slot="start">
+                    <ion-skeleton-text animated></ion-skeleton-text>
+                </ion-thumbnail>
+                <ion-label>
+                    <h3>
+                        <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+                    </h3>
+                    <p>
+                        <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+                    </p>
+                    <p>
+                        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+                    </p>
+                </ion-label>
+            </ion-item>
+        </ion-list>
+    </section>
 </ion-content>

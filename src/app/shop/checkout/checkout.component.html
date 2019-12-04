@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="Back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Checkout</ion-title>
+    <!-- categories -->
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>ORDER SUMMARY</ion-card-subtitle>
+      <ion-card-title color="primary" class="ion-text-end">{{purchase.totalAmount | localeCurrency}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <table class="zui-table">
+<!--        <thead>-->
+<!--        <tr>-->
+<!--          <th colspan="2">Name</th>-->
+<!--          <th>Qty</th>-->
+<!--          <th>Amount</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+        <tbody>
+        <tr *ngFor="let item of purchase.cart">
+          <td colspan="2">{{item.name}}</td>
+          <td>{{item.quantity}}</td>
+          <td style="text-align: right;"><strong>{{item.totalAmount | localeCurrency}}</strong></td>
+        </tr>
+        </tbody>
+      </table>
+    </ion-card-content>
+  </ion-card>
+  <!--billing card-->
+  <div class="shadow px-2 py-2 mx-2 rounded">
+<!--    <ion-card-header>-->
+<!--      <ion-card-subtitle>BILLING INFO</ion-card-subtitle>-->
+<!--    </ion-card-header>-->
+    <div>
+      <div class="py-2">
+        <ion-item>
+          <ion-label position="stacked">Name</ion-label>
+          <ion-input placeholder="Email" value="Hubert Formin" type="text"></ion-input>
+        </ion-item>
+      </div>
+      <div class="py-2">
+        <ion-item>
+          <ion-label position="stacked">Address</ion-label>
+          <ion-input placeholder="Email" value="Simbock, yaounde" type="email"></ion-input>
+        </ion-item>
+      </div>
+      <div class="py-2">
+        <ion-item>
+          <ion-label position="stacked">Phone number</ion-label>
+          <ion-input placeholder="text" value="+237 681736338" type="tel"></ion-input>
+        </ion-item>
+      </div>
+      <div class="py-2 px-3">
+        <small>Payment Method</small>
+        <h5>Cash on delivery</h5>
+      </div>
+      <div class="py-2 px-3">
+        <small>Delivery Fee</small>
+        <h5>{{1000 | localeCurrency}}</h5>
+      </div>
+    </div>
+    <div class="py-2 px-2 border-black text-right" style="border-bottom: 1px solid #000;border-top: 1px solid #000;">
+      <h1>Total: {{purchase.totalAmount + 1000 | localeCurrency}}</h1>
+    </div>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar class="default">
+    <ion-button color="primary" (click)="checkOut()" [disabled]="purchase.cart.length === 0" size="full">Complete</ion-button>
+  </ion-toolbar>
+</ion-footer>

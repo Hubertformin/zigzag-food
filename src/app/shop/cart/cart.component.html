@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button [defaultHref]="'/main/tabs/shop/categories'" text="Back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Cart</ion-title>
+    <!-- categories -->
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list lines="none">
+<!--    <ion-searchbar showCancelButton="focus"></ion-searchbar>-->
+    <ion-list-header>
+      <ion-label>CART ITEMS ({{purchase.cart.length}})</ion-label>
+    </ion-list-header>
+    <!-- cart body-->
+    <section class="body w-full">
+      <section *ngFor="let item of purchase.cart;" class="py-2 px-2" style="border-bottom: 1px solid #ddd;">
+        <ion-row>
+          <ion-col size="2">
+            <ion-img [src]="item.imageUrl"></ion-img>
+          </ion-col>
+          <ion-col size="10">
+            <ion-row>
+              <ion-col size="8">
+                <h4 class="text-wrap my-0">{{item.name}}</h4>
+              </ion-col>
+              <ion-col size="4" class="flex ion-align-items-center ion-justify-content-center">
+                <span (click)="purchase.removeFromCart(item.id)"
+                      class="text-red p-1 flex ion-align-items-center border-solid border rounded border-red">
+<!--                  <ion-icon name="close-circle-outline"></ion-icon>-->
+                  <small> remove</small></span>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="4" class="px-2 py-1">
+                <input type="tel" placeholder="Qty" style="border: 1px solid #ddd;" class="rounded w-full px-2 py-1" (change)="onQuantityChange($event.target.value, item.id)" min="1" [(ngModel)]="item.quantity">
+              </ion-col>
+              <ion-col size="6">
+                <p class="text-grey-dark mb-0 mt-1"><strong>{{item.totalAmount | localeCurrency}}</strong></p>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </section>
+    </section>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-toolbar class="default">
+    <ion-buttons><p class="amount text-right w-full pr-4 m-0"><strong>Total: {{purchase.totalAmount | localeCurrency}}</strong></p></ion-buttons>
+    <ion-button routerLink="/main/tabs/shop/checkout" color="primary" [disabled]="purchase.cart.length === 0" size="full">Buy</ion-button>
+  </ion-toolbar>
+</ion-footer>
