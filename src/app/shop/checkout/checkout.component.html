@@ -8,10 +8,13 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
+  <div class="py-2 px-2 border-black text-center shadow text-green-dark">
+    <h1>Total: {{purchase.totalAmount + 1000 | localeCurrency}}</h1>
+  </div>
   <ion-card>
     <ion-card-header>
       <ion-card-subtitle>ORDER SUMMARY</ion-card-subtitle>
-      <ion-card-title color="primary" class="ion-text-end">{{purchase.totalAmount | localeCurrency}}</ion-card-title>
+<!--      <ion-card-title color="primary" class="ion-text-end"></ion-card-title>-->
     </ion-card-header>
     <ion-card-content>
       <table class="zui-table">
@@ -30,6 +33,7 @@
         </tr>
         </tbody>
       </table>
+      <h1 class="my-2 ion-text-end pt-3" style="border-top: 1px solid #dddddd;">{{purchase.totalAmount | localeCurrency}}</h1>
     </ion-card-content>
   </ion-card>
   <!--billing card-->
@@ -38,6 +42,7 @@
 <!--      <ion-card-subtitle>BILLING INFO</ion-card-subtitle>-->
 <!--    </ion-card-header>-->
     <div>
+      <h6 class="px-4 text-grey-dark">BILLING INFO</h6>
       <div class="py-2">
         <ion-item>
           <ion-label position="stacked">Name</ion-label>

@@ -31,7 +31,7 @@
     <div class="py-2">
       <ion-item>
         <ion-label position="stacked">Phone number</ion-label>
-        <ion-input formControlName="phoneNumber" placeholder="Phone number"></ion-input>
+        <ion-input type="tel" formControlName="phoneNumber" placeholder="Phone number"></ion-input>
       </ion-item>
         <p *ngIf="(phoneNumber.dirty || phoneNumber.touched) && phoneNumber.invalid" class="text-red m-0 px-6"><small>Passwords do not match</small></p>
     </div>
@@ -50,7 +50,7 @@
         <ion-label position="stacked">Confirm password</ion-label>
         <ion-input type="password" formControlName="confirm" placeholder="***********"></ion-input>
       </ion-item>
-        <p *ngIf="(confirmPassword.dirty || confirmPassword.touched) && (confirmPassword.invalid || password.value !== confirmPassword.value)"
+        <p *ngIf="(confirmPassword.dirty || confirmPassword.touched) && (password.value !== confirmPassword.value)"
            class="text-red m-0 px-6"><small>Passwords do not match</small></p>
     </div>
     <div class="py-3">
@@ -62,7 +62,7 @@
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar>
+  <ion-toolbar class="default">
     <ion-button (click)="signUp($event)" color="primary" size="full">Create account</ion-button>
   </ion-toolbar>
 </ion-footer>

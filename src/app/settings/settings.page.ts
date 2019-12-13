@@ -1,13 +1,21 @@
 import {Component, OnInit} from '@angular/core';
 import {ActionSheetController} from '@ionic/angular';
 import {Storage} from '@ionic/storage';
+import {FormBuilder, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-settings',
   templateUrl: 'settings.page.html',
   styleUrls: ['settings.page.scss']
 })
-export class SettingsPage implements OnInit{
+export class SettingsPage implements OnInit {
+  userForm = this.fb.group({
+    name: ['', Validators.required],
+    phoneNumber: ['', Validators.required],
+    password: '',
+    address: ''
+  });
+
   ngOnInit(): void {
     this.storage.get('user')
         .then((data) => {
@@ -15,7 +23,7 @@ export class SettingsPage implements OnInit{
         });
   }
 
-  constructor(public actionSheetController: ActionSheetController, private storage: Storage) {}
+  constructor(public actionSheetController: ActionSheetController, private storage: Storage, private fb: FormBuilder) {}
 
   async presentActionSheet() {
     const actionSheet = await this.actionSheetController.create({

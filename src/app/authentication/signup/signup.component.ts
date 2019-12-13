@@ -34,7 +34,7 @@ export class SignupComponent implements OnInit {
   }
   // get password control
   get password() {
-    return this.form.get('phoneNumber');
+    return this.form.get('password');
   }
   // get confirm password control
   get confirmPassword() {
@@ -46,7 +46,13 @@ export class SignupComponent implements OnInit {
    */
   signUp($event) {
     console.log(this.form.value);
-    this.storage.set('user', JSON.stringify(this.form.value));
+    this.storage.set('user', JSON.stringify(this.form.value))
+        .then(() => {
+          // redirect to home page..
+          this.router.navigate(['/main']);
+        }).catch(err => {
+          console.error(err);
+    });
 
   }
   /**
